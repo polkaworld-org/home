@@ -30,7 +30,7 @@ const MetaData = ({ data, settings, title, description, image, location, tags = 
         />
       );
     } else {
-      title = 'PolkaWorld | 波卡（Polkadot）发烧友社区';
+      title = 'PolkaWorld | 波11卡（Polkadot）发烧友社区';
       description = description || config.siteDescriptionMeta || settings.description;
       image = image || settings.cover_image ? url.resolve(config.siteUrl, image) : null;
 
