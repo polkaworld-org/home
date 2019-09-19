@@ -1,2 +1,2 @@
 #!/bin/sh
-git pull && npm run build
+git pull && yarn && npm run build
