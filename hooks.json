@@ -1,0 +1,8 @@
+[
+  {
+    "id": "rebuild",
+    "execute-command": "/home/polkaworld/home/rebuild.sh",
+    "response-message": "Executing home build ...",
+    "command-working-directory": "/home/polkaworld/home"
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "development": {
+    "apiUrl": "https://cms.polkaworld.org",
+    "contentApiKey": "c359a38a3ab21cad99f3b3744e"
+  },
+  "production": {
+    "apiUrl": "https://cms.polkaworld.org",
+    "contentApiKey": "c359a38a3ab21cad99f3b3744e"
+  }
+}
