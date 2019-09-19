@@ -1,2 +1,2 @@
 #!/bin/sh
-npm run build
+git pull && npm run build
