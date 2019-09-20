@@ -19,6 +19,9 @@
     "eslint-plugin-react": "7.13.0"
   },
   "dependencies": {
+    "@polkadot/react-identicon": "^0.44.1",
+    "@polkadot/util": "^1.4.1",
+    "@polkadot/util-crypto": "^1.4.1",
     "@tryghost/helpers": "1.1.5",
     "@tryghost/helpers-gatsby": "1.0.8",
     "cheerio": "1.0.0-rc.3",
