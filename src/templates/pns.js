@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Identicon from '@polkadot/react-identicon';
 import searchIcon from '../images/search.svg';
 import { Layout } from '../components/common';
 import { MetaData } from '../components/common/meta';
-import Identicon from '@polkadot/react-identicon';
 import IconBox from '../components/IconBox';
 
 const baseUrl = 'https://laijiechan.com/api/v1/pns/'
@@ -12,7 +12,7 @@ const kusamaUrl = 'https://polkascan.io/pre/kusama/account/'
 
 const Pns = ({ data, location }) => {
   const [name, setName] = useState('')
-  const [queryName, setQueryName] = useState(false)
+  const [showQueryResult, setShowQueryResult] = useState(false)
   const [available, setAvailable] = useState(false)
   const [address, setAddress] = useState('')
   const [queryData, setQueryData] = useState({})
@@ -30,7 +30,7 @@ const Pns = ({ data, location }) => {
 
   function clearStatus() {
     setAvailable(false)
-    setQueryName(false)
+    setShowQueryResult(false)
     setAddress('')
     setErrMsg('')
     setSubmitErrMsg('')
@@ -104,7 +104,7 @@ const Pns = ({ data, location }) => {
           if (!json.data.available) {
             setQueryData(json.data)
           }
-          setQueryName(true)
+          setShowQueryResult(true)
         }
       })
       .catch(err => {
@@ -181,7 +181,7 @@ const Pns = ({ data, location }) => {
               errMsg && <ErrMsg><span>{errMsg}</span></ErrMsg>
             }
             {
-              queryName ? 
+              showQueryResult ? 
               <PnsCard>
                 <div className="name">
                   <span>{name}.ksm</span>
