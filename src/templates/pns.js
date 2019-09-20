@@ -46,8 +46,12 @@ const Pns = ({ data, location }) => {
     reader.onloadend = () => {
       setPreviewLogo(reader.result)
     }
- 
-    reader.readAsDataURL(event.target.files[0])
+
+    if (event.target.files[0]) {
+      reader.readAsDataURL(event.target.files[0])
+    } else {
+      setPreviewLogo(null)
+    }
   }
 
   async function fetchRegisteredNames() {
@@ -212,7 +216,7 @@ const Pns = ({ data, location }) => {
                     />
                   </InputItem>
                   <InputItem>
-                    <span>域名简介: </span>
+                    <span>域名简介（可选）: </span>
                     <input
                       type="text"
                       value={desc}
@@ -221,8 +225,9 @@ const Pns = ({ data, location }) => {
                     />
                   </InputItem>
                   <LogoItem>
-                    <span>域名logo：</span>
+                    <span>域名logo（可选）：</span>
                     <input
+                      className="upload-logo"
                       type="file"
                       accept="image/jpeg, image/gif, image/png, image/bmp"
                       onChange={fileChangedHandler}
@@ -435,8 +440,12 @@ const PnsCard = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  .upload-logo {
+    width: 50%;
+    
+  }
   button {
-    margin-top: 20px;
+    margin-top: 40px;
     margin-left: 40%;
     background: #1F215F;
     color: rgba(255, 255, 255, 0.7);
@@ -459,7 +468,7 @@ const RegisteredArea = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-  margin-top: 80px;
+  margin-top: 40px;
   /* :nth-child(3n+1) {
     margin-left: 0;
   } */
