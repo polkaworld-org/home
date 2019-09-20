@@ -15,7 +15,7 @@ const Pns = ({ data, location }) => {
   const [queryName, setQueryName] = useState(false)
   const [available, setAvailable] = useState(false)
   const [address, setAddress] = useState('')
-  const [mappedAddress, setMappedAddress] = useState('')
+  const [queryData, setQueryData] = useState({})
   const [desc, setDesc] = useState('')
   const [logo, setLogo] = useState(null)
   const [registeredNames, setRegisteredNames] = useState([])
@@ -31,7 +31,6 @@ const Pns = ({ data, location }) => {
   function clearStatus() {
     setAvailable(false)
     setQueryName(false)
-    setMappedAddress('')
     setAddress('')
     setErrMsg('')
     setSubmitErrMsg('')
@@ -103,7 +102,7 @@ const Pns = ({ data, location }) => {
         if (json.ok) {
           setAvailable(json.data.available)
           if (!json.data.available) {
-            setMappedAddress(json.data.address)
+            setQueryData(json.data)
           }
           setQueryName(true)
         }
@@ -192,10 +191,16 @@ const Pns = ({ data, location }) => {
                 </div>
                 {
                   !available ?
-                  <div className="address">
+                  <>
+                  <div className="show-item">
                     <span>已映射地址：</span>
-                    <span>{mappedAddress}</span>
+                    <span>{queryData.address}</span>
                   </div>
+                  <div className="show-item">
+                    <span>域名简介：</span>
+                    <span>{queryData.desc}</span>
+                  </div>
+                  </>
                   :
                   <>
                   <InputItem>
@@ -433,7 +438,10 @@ const PnsCard = styled.div`
   .submit {
     margin-top: 20px;
   }
-  .address {
+  .show-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     margin-top: 20px;
     overflow: hidden;
