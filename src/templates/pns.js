@@ -15,6 +15,7 @@ const Pns = ({ data, location }) => {
   const [showQueryResult, setShowQueryResult] = useState(false)
   const [available, setAvailable] = useState(false)
   const [address, setAddress] = useState('')
+  const [url, setUrl] = useState('')
   const [queryData, setQueryData] = useState({})
   const [desc, setDesc] = useState('')
   const [logo, setLogo] = useState(null)
@@ -123,14 +124,15 @@ const Pns = ({ data, location }) => {
     }
     setSubmitErrMsg('')
     setSuccessMsg('')
-    const url = `${baseUrl}map/`
+    const mapUrl = `${baseUrl}map/`
 
     const fd = new FormData()
     fd.append('logo', logo)
     fd.append('name', name)
     fd.append('desc', desc)
     fd.append('address', address)
-    fetch(url, {
+    fd.append('url', url)
+    fetch(mapUrl, {
       method: 'POST',
       body: fd,
     })
@@ -169,7 +171,7 @@ const Pns = ({ data, location }) => {
                     query();
                   }
                 }}
-                placeholder="请输入你想要查询的域名"
+                placeholder="请输入你想要查询的域名（只能输入小写字母或数字）"
               />
               <button
                 onClick={() => query()}
@@ -196,10 +198,20 @@ const Pns = ({ data, location }) => {
                     <span>已映射地址：</span>
                     <span>{queryData.address}</span>
                   </div>
+                  {
+                  queryData.desc &&
                   <div className="show-item">
                     <span>域名简介：</span>
                     <span>{queryData.desc}</span>
                   </div>
+                  }
+                  {
+                  queryData.url &&
+                  <div className="show-item">
+                    <span>展示网址：</span>
+                    <a href={'//' + queryData.url} target="_blank">{queryData.url}</a>
+                  </div>
+                  }
                   </>
                   :
                   <>
@@ -218,6 +230,15 @@ const Pns = ({ data, location }) => {
                         }
                       }}
                       placeholder="请输入该域名的映射地址"
+                    />
+                  </InputItem>
+                  <InputItem>
+                    <span>展示网址（可选）: </span>
+                    <input
+                      type="text"
+                      value={url}
+                      onChange={e => setUrl(e.target.value)}
+                      placeholder="请输入展示网址，如：chainx.org"
                     />
                   </InputItem>
                   <InputItem>
@@ -262,6 +283,11 @@ const Pns = ({ data, location }) => {
                   <div className="registered-item" key={index}>
                     {
                       item.logo ?
+                      item.url ?
+                      <a href={'//' + item.url} target="_blank">
+                        <img src={imageBaseUrl + item.logo} alt=''></img>
+                      </a>
+                      :
                       <img src={imageBaseUrl + item.logo} alt=''></img>
                       :
                       <IconBox
@@ -388,8 +414,9 @@ const LogoItem = styled.div`
   span {
     width: 20%;
   }
-  input {
-
+  img {
+    width: 50px;
+    height: 50px;
   }
 `
 
