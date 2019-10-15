@@ -16,6 +16,7 @@ const Pns = ({ data, location }) => {
   const [available, setAvailable] = useState(false)
   const [address, setAddress] = useState('')
   const [url, setUrl] = useState('')
+  const [email, setEmail] = useState('')
   const [queryData, setQueryData] = useState({})
   const [desc, setDesc] = useState('')
   const [logo, setLogo] = useState(null)
@@ -132,6 +133,7 @@ const Pns = ({ data, location }) => {
     fd.append('desc', desc)
     fd.append('address', address)
     fd.append('url', url)
+    fd.append('email', email)
     fetch(mapUrl, {
       method: 'POST',
       body: fd,
@@ -157,7 +159,7 @@ const Pns = ({ data, location }) => {
       <Layout>
         <div className="container">
           <article className="pns" style={pnsStyle}>
-            <p style={{ marginTop: '40px', fontSize: '24px', color: '#1F215F' }}>Polkadot 域名注册系统</p>
+            <p style={{ marginTop: '10px', marginBottom: '10px', fontSize: '24px', color: '#1F215F' }}>Polkadot 域名注册系统</p>
             <SearchArea>
               <input
                 type="text"
@@ -248,6 +250,15 @@ const Pns = ({ data, location }) => {
                       value={desc}
                       onChange={e => setDesc(e.target.value)}
                       placeholder="请输入域名简介"
+                    />
+                  </InputItem>
+                  <InputItem>
+                    <span>邮箱地址（可选）: </span>
+                    <input
+                      type="text"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      placeholder="请输入您的邮箱，项目正式上线将第一时间通知您"
                     />
                   </InputItem>
                   <LogoItem>
